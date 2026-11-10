@@ -1,0 +1,7 @@
+[out:json][timeout:25];
+// fetch area “Ljubljana” to search in
+{{geocodeArea:Ljubljana}}->.searchArea;
+// gather results
+nwr["building"="university"](area.searchArea);
+// print results
+out geom;
