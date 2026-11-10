@@ -1,0 +1,22 @@
+[out:json][timeout:90];
+{{geocodeArea:Ljubljana}}->.searchArea;
+
+(
+  nwr["amenity"="student_accommodation"](area.searchArea);
+  nwr["building"="dormitory"](area.searchArea);
+  nwr["name"~"študentski dom|študentsko naselje",i](area.searchArea);
+)->.vsi;
+
+(
+  nwr.vsi["tourism"];
+  nwr.vsi["highway"];
+  nwr.vsi["public_transport"];
+  nwr.vsi["railway"];
+  nwr.vsi["bus"];
+  nwr.vsi["name"~"dijaški dom|dijaštki dom",i];
+  nwr.vsi["addr:housenumber"="1a"];
+  nwr.vsi["operator"~"avant2go",i];
+)->.izloci;
+
+(.vsi; - .izloci;);
+out geom;
